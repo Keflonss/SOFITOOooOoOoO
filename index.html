@@ -78,51 +78,23 @@
             font-family: 'Press Start 2P', cursive; font-size: 1.5rem; color: #c9184a; margin-bottom: 40px; text-align: center;
         }
 
-        /* Contenedor del collage */
         #collage-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-            /* Damos un poco de espacio abajo para que no quede pegado */
-            padding-bottom: 50px; 
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;
+            max-width: 1200px; width: 100%; padding-bottom: 50px; 
         }
 
-        /* Estilo Polaroid */
         .polaroid {
-            background: #fff;
-            padding: 15px 15px 40px 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            border-radius: 3px;
-            width: 250px; /* Tamaño un poco más ajustado para que entren varias */
-            
-            /* Estado inicial: ocultas y un poco encogidas para la animación */
-            opacity: 0;
-            transform: scale(0.6) translateY(50px);
+            background: #fff; padding: 15px 15px 40px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 3px; width: 250px; opacity: 0; transform: scale(0.6) translateY(50px);
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Efecto al pasar el mouse por encima de una foto */
         .polaroid:hover {
-            z-index: 50; /* La trae al frente */
-            transform: scale(1.1) rotate(0deg) !important; /* La endereza y agranda */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            cursor: pointer;
+            z-index: 50; transform: scale(1.1) rotate(0deg) !important; box-shadow: 0 15px 35px rgba(0,0,0,0.3); cursor: pointer;
         }
 
-        .polaroid img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border: 1px solid #eee;
-        }
-
-        .polaroid .caption {
-            text-align: center; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; line-height: 1.2;
-        }
+        .polaroid img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #eee; }
+        .polaroid .caption { text-align: center; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; line-height: 1.2; }
 
     </style>
 </head>
@@ -155,37 +127,34 @@
         <!-- Contenedor del collage -->
         <div id="collage-container">
             
-            <!-- COPIA ESTE BLOQUE POR CADA FOTO QUE TENGAS -->
-            <div class="polaroid">
-                <img src="img/foto1.jpg" alt="Recuerdo">
-                <div class="caption">Mi foto favorita...</div>
-            </div>
-
-            <div class="polaroid">
-                <img src="img/foto2.jpg" alt="Recuerdo">
-                <div class="caption">Ese día increíble</div>
-            </div>
-
-            <div class="polaroid">
-                <img src="img/foto3.jpg" alt="Recuerdo">
-                <div class="caption">Me haces tan feliz</div>
-            </div>
-
-            <div class="polaroid">
-                <img src="img/foto4.jpg" alt="Recuerdo">
-                <div class="caption">Siempre juntos</div>
-            </div>
-
-            <div class="polaroid">
-                <img src="img/foto5.jpg" alt="Recuerdo">
-                <div class="caption">Tu sonrisa 🥰</div>
-            </div>
-            
-            <div class="polaroid">
-                <img src="img/foto6.jpg" alt="Recuerdo">
-                <div class="caption">Aventuras contigo</div>
-            </div>
-            <!-- FIN DEL BLOQUE A COPIAR -->
+            <!-- LAS 27 FOTOS -->
+            <div class="polaroid"><img src="img/foto1.jpg" alt="Recuerdo"><div class="caption">El inicio de todo</div></div>
+            <div class="polaroid"><img src="img/foto2.jpg" alt="Recuerdo"><div class="caption">Mi favorita</div></div>
+            <div class="polaroid"><img src="img/foto3.jpg" alt="Recuerdo"><div class="caption">Ese día especial</div></div>
+            <div class="polaroid"><img src="img/foto4.jpg" alt="Recuerdo"><div class="caption">Siempre juntos</div></div>
+            <div class="polaroid"><img src="img/foto5.jpg" alt="Recuerdo"><div class="caption">Tu sonrisa 🥰</div></div>
+            <div class="polaroid"><img src="img/foto6.jpg" alt="Recuerdo"><div class="caption">Aventuras contigo</div></div>
+            <div class="polaroid"><img src="img/foto7.jpg" alt="Recuerdo"><div class="caption">Inolvidable</div></div>
+            <div class="polaroid"><img src="img/foto8.jpg" alt="Recuerdo"><div class="caption">Me haces feliz</div></div>
+            <div class="polaroid"><img src="img/foto9.jpg" alt="Recuerdo"><div class="caption">Tú y yo</div></div>
+            <div class="polaroid"><img src="img/foto10.jpg" alt="Recuerdo"><div class="caption">Momentos únicos</div></div>
+            <div class="polaroid"><img src="img/foto11.jpg" alt="Recuerdo"><div class="caption">Magia pura</div></div>
+            <div class="polaroid"><img src="img/foto12.jpg" alt="Recuerdo"><div class="caption">Me encantas</div></div>
+            <div class="polaroid"><img src="img/foto13.jpg" alt="Recuerdo"><div class="caption">Nuestra historia</div></div>
+            <div class="polaroid"><img src="img/foto14.jpg" alt="Recuerdo"><div class="caption">Días felices</div></div>
+            <div class="polaroid"><img src="img/foto15.jpg" alt="Recuerdo"><div class="caption">Contigo todo es mejor</div></div>
+            <div class="polaroid"><img src="img/foto16.jpg" alt="Recuerdo"><div class="caption">Mi lugar seguro</div></div>
+            <div class="polaroid"><img src="img/foto17.jpg" alt="Recuerdo"><div class="caption">Recuerdos hermosos</div></div>
+            <div class="polaroid"><img src="img/foto18.jpg" alt="Recuerdo"><div class="caption">Te quiero muchísimo</div></div>
+            <div class="polaroid"><img src="img/foto19.jpg" alt="Recuerdo"><div class="caption">Por más días así</div></div>
+            <div class="polaroid"><img src="img/foto20.jpg" alt="Recuerdo"><div class="caption">Eres increíble</div></div>
+            <div class="polaroid"><img src="img/foto21.jpg" alt="Recuerdo"><div class="caption">Risas y más risas</div></div>
+            <div class="polaroid"><img src="img/foto22.jpg" alt="Recuerdo"><div class="caption">Mi persona favorita</div></div>
+            <div class="polaroid"><img src="img/foto23.jpg" alt="Recuerdo"><div class="caption">Simplemente tú</div></div>
+            <div class="polaroid"><img src="img/foto24.jpg" alt="Recuerdo"><div class="caption">Qué bonita eres</div></div>
+            <div class="polaroid"><img src="img/foto25.jpg" alt="Recuerdo"><div class="caption">Juntos es mejor</div></div>
+            <div class="polaroid"><img src="img/foto26.jpg" alt="Recuerdo"><div class="caption">Coleccionando momentos</div></div>
+            <div class="polaroid"><img src="img/foto27.jpg" alt="Recuerdo"><div class="caption">Y los que faltan...</div></div>
 
         </div>
 
@@ -198,7 +167,6 @@
         const polaroids = document.querySelectorAll('.polaroid');
 
         btnHistoria.addEventListener('click', function() {
-            // 1. Desvanece la portada
             bienvenida.style.opacity = '0';
             bienvenida.style.transform = 'scale(1.2)';
 
@@ -206,20 +174,15 @@
                 bienvenida.style.display = 'none';
                 contenido.style.display = 'flex';
                 
-                // 2. Muestra el fondo del collage
                 setTimeout(() => {
                     contenido.style.opacity = '1';
                     
-                    // 3. ANIMACIÓN DEL COLLAGE: Hacemos aparecer las fotos una por una
                     polaroids.forEach((pol, index) => {
                         setTimeout(() => {
-                            // Genera una rotación aleatoria entre -15 y 15 grados para que se vea desordenado
                             const rotacion = Math.floor(Math.random() * 30) - 15;
-                            
                             pol.style.opacity = '1';
                             pol.style.transform = `scale(1) translateY(0) rotate(${rotacion}deg)`;
-                            
-                        }, index * 200); // Aparece una nueva foto cada 200 milisegundos
+                        }, index * 150); // Reduje el tiempo a 150ms para que las 27 caigan con buen ritmo
                     });
 
                 }, 50);
