@@ -3,43 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Ti</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Fuente elegante de Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <title>Para Sofía ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffaa00;
+            background-image: 
+                linear-gradient(to bottom, #ff7b00, #ffaa00, #ffc800, #ffe100),
+                linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05)), 
+                linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05));
+            background-size: 100% 100%, 64px 64px, 64px 64px;
+            background-position: 0 0, 0 0, 32px 32px;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* --- PANTALLA DE INICIO (Minecraft) --- */
+        #pantalla-bienvenida {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 100; transition: opacity 1s ease, transform 1s ease; overflow: hidden;
+        }
+
+        .corazon-container {
+            position: relative; width: 250px; height: 250px; margin-bottom: 50px;
+            animation: latido 1.2s infinite; z-index: 10;
+        }
+
+        .corazon-mc { width: 100%; height: 100%; filter: drop-shadow(0px 12px 20px rgba(229, 37, 33, 0.6)); }
+
+        .letra-s {
+            position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
+            font-family: 'Press Start 2P', cursive; font-size: 6rem; color: white; text-shadow: 6px 6px 0 #000;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); } 15% { transform: scale(1.1); }
+            30% { transform: scale(1); } 45% { transform: scale(1.1); }
+            60% { transform: scale(1); } 100% { transform: scale(1); }
+        }
+
+        .btn-historia {
+            background-color: #4CAF50; color: white; font-family: 'Press Start 2P', cursive;
+            font-size: 1rem; padding: 20px 30px; border: 4px solid #2e7d32; cursor: pointer;
+            box-shadow: 0 8px 0 #1b5e20, 0 15px 20px rgba(0,0,0,0.4); transition: all 0.1s ease; text-transform: uppercase; z-index: 10;
+        }
+
+        .btn-historia:active { transform: translateY(8px); box-shadow: 0 0 0 #1b5e20, 0 5px 10px rgba(0,0,0,0.4); }
+
+        .item-flotante {
+            position: absolute; opacity: 0.85; animation: flotar-random 6s ease-in-out infinite alternate;
+            shape-rendering: crispEdges; filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.2));
+        }
+
+        .item-1 { top: 15%; left: 15%; width: 70px; animation-duration: 5s; } 
+        .item-2 { top: 65%; left: 10%; width: 60px; animation-duration: 7s; } 
+        .item-3 { top: 20%; right: 15%; width: 80px; animation-duration: 6s; } 
+        .item-4 { top: 70%; right: 12%; width: 65px; animation-duration: 8s; } 
+
+        @keyframes flotar-random { 0% { transform: translateY(0) rotate(-10deg); } 100% { transform: translateY(-30px) rotate(10deg); } }
+
+        /* --- CONTENIDO PRINCIPAL Y COLLAGE --- */
+        #contenido-principal {
+            opacity: 0; display: none; flex-direction: column; align-items: center; justify-content: flex-start;
+            padding: 50px 20px; min-height: 100vh; background-color: #fdfbfb; transition: opacity 1s ease;
+        }
+
+        .titulo-collage {
+            font-family: 'Press Start 2P', cursive; font-size: 1.5rem; color: #c9184a; margin-bottom: 40px; text-align: center;
+        }
+
+        /* Contenedor del collage */
+        #collage-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            /* Damos un poco de espacio abajo para que no quede pegado */
+            padding-bottom: 50px; 
+        }
+
+        /* Estilo Polaroid */
+        .polaroid {
+            background: #fff;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 3px;
+            width: 250px; /* Tamaño un poco más ajustado para que entren varias */
+            
+            /* Estado inicial: ocultas y un poco encogidas para la animación */
+            opacity: 0;
+            transform: scale(0.6) translateY(50px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Efecto al pasar el mouse por encima de una foto */
+        .polaroid:hover {
+            z-index: 50; /* La trae al frente */
+            transform: scale(1.1) rotate(0deg) !important; /* La endereza y agranda */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        .polaroid .caption {
+            text-align: center; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; line-height: 1.2;
+        }
+
+    </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1>Nuestra Historia</h1>
-        <p>Un pequeño detalle para alguien muy especial.</p>
-    </header>
+    <!-- PANTALLA DE INICIO -->
+    <div id="pantalla-bienvenida">
+        <svg class="item-flotante item-1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M7,1 h2 v1 h2 v1 h1 v2 h1 v3 h-1 v2 h-1 v2 h-2 v2 h-2 v-2 h-1 v-2 h-1 v-2 h-1 v-3 h1 v-2 h1 v-1 h2 z" /><path fill="#4AEDED" d="M7,2 h2 v1 h1 v1 h1 v3 h-1 v2 h-1 v1 h-2 v-1 h-1 v-2 h-1 v-3 h1 v-1 h1 z" /><path fill="#FFF" d="M7,3 h1 v1 h-1 z M6,4 h1 v2 h-1 z" /></svg>
+        <svg class="item-flotante item-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M7,1 h1 v1 h1 v1 h2 v1 h2 v1 h1 v4 h-1 v2 h-1 v2 h-4 v1 h-2 v-1 h-1 v-2 h-1 v-4 h1 v-1 h2 v-1 h1 v-1 z"/><path fill="#FFD700" d="M8,2 h1 v1 h2 v1 h1 v4 h-1 v2 h-1 v1 h-4 v-1 h-1 v-2 h-1 v-4 h1 v-1 h2 z"/><path fill="#8B4513" d="M7,1 h1 v3 h-1 z"/><path fill="#FFF" d="M5,5 h2 v1 h-2 z M4,6 h1 v2 h-1 z"/></svg>
+        <svg class="item-flotante item-3" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M6,2 h4 v1 h2 v2 h1 v3 h-1 v2 h-1 v1 h-2 v1 h1 v3 h-2 v1 h-2 v-1 h-1 v-3 h-1 v-1 h-1 v-2 h-1 v-3 h1 v-2 h2 z"/><path fill="#FF0000" d="M6,3 h4 v1 h1 v2 h-1 v2 h-4 v-2 h-1 v-2 h1 z"/><path fill="#8B0000" d="M7,4 h2 v2 h-2 z"/><path fill="#008000" d="M7,8 h2 v6 h-2 z M6,9 h1 v1 h-1 z M9,10 h1 v1 h-1 z"/></svg>
+        <svg class="item-flotante item-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M6,1 h4 v2 h1 v2 h1 v1 h1 v4 h-1 v2 h-1 v2 h-2 v1 h-2 v-1 h-2 v-2 h-1 v-2 h-1 v-4 h1 v-1 h1 v-2 h1 z"/><path fill="#8B4513" d="M7,1 h2 v2 h-2 z"/><path fill="#A8E6CF" d="M7,3 h2 v2 h1 v1 h-4 v-1 h1 z"/><path fill="#FF3366" d="M5,6 h6 v4 h-1 v2 h-1 v1 h-2 v-1 h-1 v-2 h-1 z"/><path fill="#FFF" d="M5,7 h1 v3 h-1 z M6,10 h1 v1 h-1 z"/></svg>
 
-    <section class="gallery">
-        <!-- Foto Polaroid -->
-        <div class="polaroid">
-            <img src="img/foto1.jpg" alt="Nosotros en el parque">
-            <div class="caption">Ese día increíble...</div>
+        <div class="corazon-container">
+            <svg class="corazon-mc" viewBox="0 0 15 13" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                <path fill="#000" d="M2,0 h3 v1 h-3 z M10,0 h3 v1 h-3 z M1,1 h1 v1 h-1 z M5,1 h1 v1 h-1 z M9,1 h1 v1 h-1 z M13,1 h1 v1 h-1 z M0,2 h1 v4 h-1 z M6,2 h3 v1 h-3 z M14,2 h1 v4 h-1 z M7,3 h1 v1 h-1 z M1,6 h1 v1 h-1 z M13,6 h1 v1 h-1 z M2,7 h1 v1 h-1 z M12,7 h1 v1 h-1 z M3,8 h1 v1 h-1 z M11,8 h1 v1 h-1 z M4,9 h1 v1 h-1 z M10,9 h1 v1 h-1 z M5,10 h1 v1 h-1 z M9,10 h1 v1 h-1 z M6,11 h1 v1 h-1 z M8,11 h1 v1 h-1 z M7,12 h1 v1 h-1 z" />
+                <path fill="#e52521" d="M2,1 h3 v1 h-3 z M10,1 h3 v1 h-3 z M1,2 h5 v1 h-5 z M9,2 h5 v1 h-5 z M1,3 h6 v1 h-6 z M8,3 h6 v1 h-6 z M1,4 h13 v2 h-13 z M2,6 h11 v1 h-11 z M3,7 h9 v1 h-9 z M4,8 h7 v1 h-7 z M5,9 h5 v1 h-5 z M6,10 h3 v1 h-3 z M7,11 h1 v1 h-1 z" />
+                <path fill="#ffa5a5" d="M2,2 h2 v1 h-2 z M1,3 h1 v1 h-1 z" />
+            </svg>
+            <span class="letra-s">S</span>
         </div>
-        <div class="polaroid">
-            <img src="img/foto2.jpg" alt="Nuestra primera cita">
-            <div class="caption">Mi recuerdo favorito.</div>
-        </div>
-    </section>
 
-    <section class="messages">
-        <!-- Tarjeta Interactiva (Se voltea al pasar el mouse o tocar) -->
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h3>Pasa el mouse por aquí 💌</h3>
-                </div>
-                <div class="flip-card-back">
-                    <p>Quería decirte que me encanta pasar tiempo contigo y que me haces muy feliz.</p>
-                </div>
+        <button id="btn-historia" class="btn-historia">Nuestra historia juntos</button>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL: COLLAGE DE FOTOS -->
+    <div id="contenido-principal">
+        
+        <h2 class="titulo-collage">¡Hola Sofía! ❤️</h2>
+
+        <!-- Contenedor del collage -->
+        <div id="collage-container">
+            
+            <!-- COPIA ESTE BLOQUE POR CADA FOTO QUE TENGAS -->
+            <div class="polaroid">
+                <img src="img/foto1.jpg" alt="Recuerdo">
+                <div class="caption">Mi foto favorita...</div>
             </div>
-        </div>
-    </section>
 
+            <div class="polaroid">
+                <img src="img/foto2.jpg" alt="Recuerdo">
+                <div class="caption">Ese día increíble</div>
+            </div>
+
+            <div class="polaroid">
+                <img src="img/foto3.jpg" alt="Recuerdo">
+                <div class="caption">Me haces tan feliz</div>
+            </div>
+
+            <div class="polaroid">
+                <img src="img/foto4.jpg" alt="Recuerdo">
+                <div class="caption">Siempre juntos</div>
+            </div>
+
+            <div class="polaroid">
+                <img src="img/foto5.jpg" alt="Recuerdo">
+                <div class="caption">Tu sonrisa 🥰</div>
+            </div>
+            
+            <div class="polaroid">
+                <img src="img/foto6.jpg" alt="Recuerdo">
+                <div class="caption">Aventuras contigo</div>
+            </div>
+            <!-- FIN DEL BLOQUE A COPIAR -->
+
+        </div>
+
+    </div>
+
+    <script>
+        const btnHistoria = document.getElementById('btn-historia');
+        const bienvenida = document.getElementById('pantalla-bienvenida');
+        const contenido = document.getElementById('contenido-principal');
+        const polaroids = document.querySelectorAll('.polaroid');
+
+        btnHistoria.addEventListener('click', function() {
+            // 1. Desvanece la portada
+            bienvenida.style.opacity = '0';
+            bienvenida.style.transform = 'scale(1.2)';
+
+            setTimeout(() => {
+                bienvenida.style.display = 'none';
+                contenido.style.display = 'flex';
+                
+                // 2. Muestra el fondo del collage
+                setTimeout(() => {
+                    contenido.style.opacity = '1';
+                    
+                    // 3. ANIMACIÓN DEL COLLAGE: Hacemos aparecer las fotos una por una
+                    polaroids.forEach((pol, index) => {
+                        setTimeout(() => {
+                            // Genera una rotación aleatoria entre -15 y 15 grados para que se vea desordenado
+                            const rotacion = Math.floor(Math.random() * 30) - 15;
+                            
+                            pol.style.opacity = '1';
+                            pol.style.transform = `scale(1) translateY(0) rotate(${rotacion}deg)`;
+                            
+                        }, index * 200); // Aparece una nueva foto cada 200 milisegundos
+                    });
+
+                }, 50);
+                
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
