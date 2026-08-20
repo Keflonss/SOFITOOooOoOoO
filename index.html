@@ -145,14 +145,42 @@
             /* Eliminamos el fondo de tierra de aquí para que herede el cielo con nubes */
         }
         /* --- NUEVO: ICONO DE PERGAMINO FLOTANTE --- */
+        /* --- NUEVO: ICONO DE PERGAMINO FLOTANTE REALISTA --- */
         #icono-pergamino {
             position: absolute;
-            right: 15%; /* Lo pega a la derecha de la pantalla */
-            bottom: 40px; /* A la altura del cofre */
-            font-size: 3.5rem; /* Tamaño del icono */
+            right: 15%; 
+            bottom: 40px; 
+            width: 80px; /* Tamaño del pergamino (puedes subirlo a 100px si lo quieres más grande) */
+            height: auto;
             cursor: pointer;
             z-index: 20;
             animation: latido-icono 2s infinite alternate;
+        }
+
+        #img-pergamino-flotante {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.6)); /* Sombra para que flote sobre la tierra */
+            /* image-rendering: pixelated; <-- Descomenta esta línea si descargas un pergamino estilo pixel art / Minecraft */
+        }
+
+        /* Aura dorada mágica detrás del pergamino */
+        #icono-pergamino::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 130%; height: 130%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #icono-pergamino:hover { transform: scale(1.15) !important; filter: brightness(1.2); }
+
+        @keyframes latido-icono {
+            0% { transform: translateY(0); filter: drop-shadow(0px 0px 5px rgba(255,215,0,0.4)); }
+            100% { transform: translateY(-12px); filter: drop-shadow(0px 0px 25px rgba(255,215,0,1)); }
         }
 
         /* Aura dorada detrás del pergamino */
@@ -433,7 +461,7 @@
         <div id="collage-container">
             
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto1.jpg" alt="Recuerdo"><div class="caption">Selfieeee!</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto1.jpg" alt="Recuerdo"><div class="caption">Selfieeee!</div></div><div class="polaroid-back"><p>04/01/2023<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
                 <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto2.jpg" alt="Recuerdo"><div class="caption">Mi favorita</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
@@ -466,25 +494,25 @@
                 <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto11.jpg" alt="Recuerdo"><div class="caption">MUSCULOS</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto12.jpg" alt="Recuerdo"><div class="caption">Me encantas</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto12.jpg" alt="Recuerdo"><div class="caption">Me encantas</div></div><div class="polaroid-back"><p>28/10/2023<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto13.jpg" alt="Recuerdo"><div class="caption">1 de mil carretes</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto13.jpg" alt="Recuerdo"><div class="caption">1 de mil carretes</div></div><div class="polaroid-back"><p>25/02/2024<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto14.jpg" alt="Recuerdo"><div class="caption">Días felices</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto14.jpg" alt="Recuerdo"><div class="caption">Días felices</div></div><div class="polaroid-back"><p>13/01/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto15.jpg" alt="Recuerdo"><div class="caption">Contigo todo es mejor</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto15.jpg" alt="Recuerdo"><div class="caption">Contigo todo es mejor</div></div><div class="polaroid-back"><p>03/02/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto16.jpg" alt="Recuerdo"><div class="caption">Mi lugar seguro</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto16.jpg" alt="Recuerdo"><div class="caption">Mi lugar seguro</div></div><div class="polaroid-back"><p>04/04/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto17.jpg" alt="Recuerdo"><div class="caption">Recuerdos hermosos</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto17.jpg" alt="Recuerdo"><div class="caption">Recuerdos hermosos</div></div><div class="polaroid-back"><p>03/08/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto18.jpg" alt="Recuerdo"><div class="caption">Te quiero muchísimo</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto18.jpg" alt="Recuerdo"><div class="caption">Te quiero muchísimo</div></div><div class="polaroid-back"><p>01/10/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
                 <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto19.jpg" alt="Recuerdo"><div class="caption">Por más días así</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
@@ -508,10 +536,10 @@
                 <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto25.jpg" alt="Recuerdo"><div class="caption">Juntos es mejor</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto26.png" alt="Recuerdo"><div class="caption">Coleccionando momentos</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto26.png" alt="Recuerdo"><div class="caption">Coleccionando momentos</div></div><div class="polaroid-back"><p>25/01/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             <div class="polaroid">
-                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto27.png" alt="Recuerdo"><div class="caption">Y los que faltan...</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto27.png" alt="Recuerdo"><div class="caption">Y los que faltan...</div></div><div class="polaroid-back"><p>16/08/2025<br><br></p></div></div><div class="corazon-like">❤️</div>
             </div>
             
         </div> <!-- FIN COLLAGE -->
@@ -536,8 +564,9 @@
                     <path fill="#000" d="M2,10 h12 v1 h-12 z M2,13 h12 v1 h-12 z M2,11 h1 v2 h-1 z M13,11 h1 v2 h-1 z M2,6 h12 v1 h-12 z M2,9 h12 v1 h-12 z M2,7 h1 v2 h-1 z M13,7 h1 v2 h-1 z M2,1 h12 v1 h-12 z M2,5 h12 v1 h-12 z M2,2 h1 v3 h-1 z M13,2 h1 v3 h-1 z M7,4 h2 v1 h-2 z M7,5 h2 v1 h-2 z M6,4 h1 v2 h-1 z M9,4 h1 v2 h-1 z"/>
                 </svg>
             </div>
+            <!-- NUEVO: ICONO PARA REABRIR LA CARTA (REALISTA) -->
             <div id="icono-pergamino" style="display: none;">
-                <span>📜</span>
+                <img src="pergamino_icono.png" alt="Reabrir carta" id="img-pergamino-flotante">
             </div>
         </div>
 
