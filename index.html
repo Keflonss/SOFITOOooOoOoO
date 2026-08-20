@@ -28,19 +28,14 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 100; transition: opacity 1s ease, transform 1s ease; overflow: hidden;
-            cursor: crosshair; /* Cambia el cursor para invitar a la interacción */
+            cursor: crosshair; 
         }
 
         /* --- DETALLE 1: PARTÍCULAS DEL CURSOR --- */
         .particula {
-            position: fixed;
-            pointer-events: none; /* Para que no bloqueen los clics */
-            z-index: 99;
-            width: 16px; height: 16px;
-            /* Corazoncito rosado en SVG (Data URI) */
+            position: fixed; pointer-events: none; z-index: 99; width: 16px; height: 16px;
             background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 15 13" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><path fill="%23ff7790" d="M2,0 h3 v1 h-3 z M10,0 h3 v1 h-3 z M1,1 h1 v1 h-1 z M5,1 h1 v1 h-1 z M9,1 h1 v1 h-1 z M13,1 h1 v1 h-1 z M0,2 h1 v4 h-1 z M6,2 h3 v1 h-3 z M14,2 h1 v4 h-1 z M7,3 h1 v1 h-1 z M1,6 h1 v1 h-1 z M13,6 h1 v1 h-1 z M2,7 h1 v1 h-1 z M12,7 h1 v1 h-1 z M3,8 h1 v1 h-1 z M11,8 h1 v1 h-1 z M4,9 h1 v1 h-1 z M10,9 h1 v1 h-1 z M5,10 h1 v1 h-1 z M9,10 h1 v1 h-1 z M6,11 h1 v1 h-1 z M8,11 h1 v1 h-1 z M7,12 h1 v1 h-1 z"/></svg>');
-            background-size: cover;
-            animation: caer 1s linear forwards;
+            background-size: cover; animation: caer 1s linear forwards;
         }
 
         @keyframes caer {
@@ -50,23 +45,15 @@
 
         /* --- DETALLE 2: TEXTO RPG --- */
         #dialogo-rpg {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-            color: #fff;
-            text-shadow: 2px 2px 0px #000;
-            margin-bottom: 25px;
-            text-align: center;
-            min-height: 20px;
-            z-index: 10;
-            line-height: 1.5;
-            max-width: 80%;
+            font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: #fff;
+            text-shadow: 2px 2px 0px #000; margin-bottom: 25px; text-align: center;
+            min-height: 20px; z-index: 10; line-height: 1.5; max-width: 80%;
         }
 
         .corazon-container {
             position: relative; width: 250px; height: 250px; margin-bottom: 30px;
             animation: latido 1.2s infinite; z-index: 10;
         }
-
         .corazon-mc { width: 100%; height: 100%; filter: drop-shadow(0px 12px 20px rgba(229, 37, 33, 0.6)); }
 
         .letra-s {
@@ -85,50 +72,231 @@
             font-size: 1rem; padding: 20px 30px; border: 4px solid #2e7d32; cursor: pointer;
             box-shadow: 0 8px 0 #1b5e20, 0 15px 20px rgba(0,0,0,0.4); transition: all 0.1s ease; text-transform: uppercase; z-index: 10;
         }
-
         .btn-historia:active { transform: translateY(8px); box-shadow: 0 0 0 #1b5e20, 0 5px 10px rgba(0,0,0,0.4); }
 
         .item-container {
             position: absolute; top: 0; left: 0; opacity: 0.85; 
             filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
-            will-change: transform; 
-            cursor: pointer;
+            will-change: transform; cursor: pointer;
         }
-
-        /* --- DETALLE 3: EFECTO AL ATRAPAR FIGURA --- */
         .item-atrapado {
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: drop-shadow(0px 0px 25px rgba(255, 255, 255, 0.9)) !important;
-            opacity: 1 !important;
-            z-index: 50;
+            opacity: 1 !important; z-index: 50;
         }
-
         .item-container svg { width: 100%; height: 100%; shape-rendering: crispEdges; overflow: visible !important; }
+        
         .item-1 { width: 90px; } .item-2 { width: 115px; } .item-3 { width: 100px; } .item-4 { width: 120px; } 
         .item-5 { width: 85px; } .item-6 { width: 125px; } .item-7 { width: 110px; } .item-8 { width: 105px; } 
         .item-9 { width: 95px; } .item-10 { width: 130px; } .item-11 { width: 125px; } .item-12 { width: 80px; } 
+        path[fill="#000"] { stroke: #000; stroke-width: 0.6; stroke-linejoin: miter; }
 
+        /* --- 1. EL CIELO CON NUBES ANIMADAS --- */
         #contenido-principal {
             opacity: 0; display: none; flex-direction: column; align-items: center; justify-content: flex-start;
-            padding: 50px 20px; min-height: 100vh; background-color: #fdfbfb; transition: opacity 1s ease;
+            padding: 50px 0 0 0; /* Sin padding lateral para que la tierra ocupe todo */
+            min-height: 100vh; 
+            
+            /* CIELO REAL DE MINECRAFT */
+            background-color: #8cb1ff; /* Color de fondo por si la imagen tarda en cargar */
+            background-image: url('nubes.png'); 
+            background-repeat: repeat; /* Para que las nubes llenen toda la pantalla */
+            background-size: 500px; /* Escala las nubes para que se vean grandes */
+            image-rendering: pixelated; /* ¡CRUCIAL! Evita que los píxeles se vean borrosos */
+            
+            /* Animación que mueve las nubes infinitamente */
+            animation: mover-nubes 60s linear infinite; 
+            transition: opacity 1s ease;
         }
 
-        .titulo-collage { font-family: 'Press Start 2P', cursive; font-size: 1.5rem; color: #c9184a; margin-bottom: 40px; text-align: center; }
+        /* El motor que mueve las nubes de derecha a izquierda */
+        @keyframes mover-nubes {
+            from { background-position: 0 0; }
+            to { background-position: -1000px 0; } 
+        }
 
-        #collage-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; max-width: 1200px; width: 100%; padding-bottom: 50px; }
+        /* Borde para que el título resalte sobre el cielo */
+        .titulo-collage { 
+            font-family: 'Press Start 2P', cursive; font-size: 1.5rem; color: #c9184a; 
+            margin-bottom: 40px; text-align: center; 
+            text-shadow: 2px 2px 0px #fff; 
+        }
 
-        .polaroid { background: #fff; padding: 15px 15px 40px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 3px; width: 250px; opacity: 0; transform: scale(0.6) translateY(50px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .polaroid:hover { z-index: 50; transform: scale(1.1) rotate(0deg) !important; box-shadow: 0 15px 35px rgba(0,0,0,0.3); cursor: pointer; }
-        .polaroid img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #eee; }
-        .polaroid .caption { text-align: center; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; line-height: 1.2; }
+        /* Margen para que las fotos no choquen con los bordes de la pantalla */
+        #collage-container { 
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; 
+            max-width: 1200px; width: 100%; 
+            padding: 0 20px 50px 20px; 
+        }
 
-        path[fill="#000"] { stroke: #000; stroke-width: 0.6; stroke-linejoin: miter; }
+        /* --- 2. LA SECCIÓN DEL COFRE (Ahora en el cielo) --- */
+        #seccion-cofre {
+            width: 100%; margin-top: 60px;
+            display: flex; flex-direction: column; align-items: center;
+            /* Eliminamos el fondo de tierra de aquí para que herede el cielo con nubes */
+        }
+        
+        /* --- EL COFRE: ENTRADA ÉPICA Y RESPLANDOR --- */
+        #cofre-btn {
+            width: 140px; /* Un poco más grande para que destaque */
+            height: 140px; 
+            cursor: pointer; 
+            position: relative;
+            z-index: 10; 
+            /* Animación 1: Cae y rebota. Animación 2: Flota suavemente después de caer */
+            animation: 
+                caida-epica 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards,
+                flotar-magico 3s ease-in-out infinite alternate 1.2s;
+            margin-bottom: 20px;
+        }
+
+        /* El aura brillante dorada detrás del cofre */
+        #cofre-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 60%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: latido-luz 2s infinite alternate;
+            pointer-events: none; /* Para que no estorbe el clic */
+        }
+
+        /* Hover para cuando pase el mouse */
+        #cofre-btn:hover { transform: scale(1.1) translateY(-5px) !important; filter: brightness(1.2); }
+        
+        #cofre-btn svg, #cofre-btn img { 
+            width: 100%; height: 100%; 
+            image-rendering: pixelated; 
+            filter: drop-shadow(0px 15px 10px rgba(0,0,0,0.6)); 
+        }
+
+        /* --- MOTOR DE ANIMACIONES DEL COFRE --- */
+        @keyframes caida-epica {
+            0% { transform: translateY(-300px) scale(1); opacity: 0; }
+            60% { transform: translateY(0) scale(1.1, 0.9); opacity: 1; }
+            80% { transform: translateY(-30px) scale(0.95, 1.05); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes flotar-magico {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-12px); }
+        }
+
+        @keyframes latido-luz {
+            0% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* --- 3. EL SUELO REAL DE MINECRAFT (Capas) --- */
+        #suelo-minecraft {
+            width: 100%;
+            height: 192px; /* Exactamente 3 bloques de profundidad (64px * 3) */
+            
+            /* LA MAGIA: 
+               Capa 1 (Frente): Tierra con pasto (solo se repite hacia los lados)
+               Capa 2 (Fondo): Tierra pura (se repite en todas direcciones) */
+            background-image: url('tierra.png'), url('tierra_sola.png');
+            background-repeat: repeat-x, repeat;
+            background-position: top left, top left;
+            background-size: 64px 64px, 64px 64px;
+            
+            image-rendering: pixelated;
+            box-shadow: inset 0 15px 25px rgba(0,0,0,0.6); /* Sombra para dar profundidad */
+        }
+
+        /* --- ESTRUCTURA 3D DE LAS POLAROIDS --- */
+        .polaroid {
+            perspective: 1000px;
+            width: 250px; height: 320px;
+            opacity: 0; transform: scale(0.6) translateY(50px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .polaroid:hover { z-index: 50; }
+        .polaroid:hover .polaroid-inner { box-shadow: 0 15px 35px rgba(0,0,0,0.3); transform: scale(1.05); }
+        .polaroid:hover .polaroid-inner.girada { transform: scale(1.05) rotateY(180deg); }
+
+        .polaroid-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.8s; transform-style: preserve-3d;
+            cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 3px;
+        }
+
+        .polaroid-inner.girada { transform: rotateY(180deg); }
+
+        .polaroid-front, .polaroid-back {
+            position: absolute; width: 100%; height: 100%;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            background: #fff; padding: 15px; border-radius: 3px;
+            display: flex; flex-direction: column;
+        }
+
+        .polaroid-front img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #eee; }
+        .polaroid-front .caption { text-align: center; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; line-height: 1.2; }
+
+        .polaroid-back {
+            transform: rotateY(180deg);
+            justify-content: center; align-items: center; text-align: center;
+            background-color: #fffafb; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: #c9184a;
+            padding: 20px; border: 2px dashed #ffb3c6;
+        }
+
+        /* --- ANIMACIÓN DEL CORAZÓN (DOBLE CLIC) --- */
+        .corazon-like {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 5rem; opacity: 0; pointer-events: none; z-index: 60;
+        }
+
+        .corazon-like.animar {
+            animation: latido-like 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes latido-like {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+            100% { transform: translate(-50%, -100%) scale(2); opacity: 0; }
+        }
+
+        /* --- FASE 2: COFRE Y PERGAMINO FINAL --- */
+        #seccion-cofre {
+            width: 100%; margin-top: 60px; padding-bottom: 50px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .instruccion-cofre {
+            font-family: 'Press Start 2P', cursive; font-size: 1rem; color: #ff7790; margin-bottom: 30px; text-align: center; text-shadow: 2px 2px 0 #000;
+        }
+        #cofre-btn {
+            width: 120px; height: 120px; cursor: pointer; transition: transform 0.2s; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.5));
+        }
+        #cofre-btn:hover { transform: scale(1.1); }
+        #cofre-btn svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
+        
+        #pergamino-final {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.85); z-index: 200; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.5s ease;
+        }
+        .pergamino-inner {
+            background-color: #f4e7c3; width: 90%; max-width: 600px; padding: 40px; border-radius: 5px; border: 4px solid #8B4513; box-shadow: inset 0 0 20px rgba(139,69,19,0.3), 0 10px 30px rgba(0,0,0,0.8); text-align: center; transform: scale(0.8); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .pergamino-inner h3 { font-family: 'Press Start 2P', cursive; font-size: 1.2rem; color: #8B4513; margin-bottom: 20px; }
+        .pergamino-inner p { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #3e2723; line-height: 1.4; white-space: pre-wrap; }
+        #btn-cerrar-carta {
+            margin-top: 30px; background-color: #8B4513; color: white; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1rem; padding: 10px 25px; border: 2px solid #5c2e0b; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 0 #5c2e0b; transition: all 0.1s;
+        }
+        #btn-cerrar-carta:active { transform: translateY(4px); box-shadow: 0 0 0 #5c2e0b; }
+
     </style>
 </head>
 <body>
 
     <audio id="musica-fondo" loop><source src="musica.mp3" type="audio/mpeg"></audio>
     <audio id="sonido-clic"><source src="clic.mp3" type="audio/mpeg"></audio>
+    <audio id="sonido-cofre"><source src="cofre.mp3" type="audio/mpeg"></audio>
 
     <div id="pantalla-bienvenida">
         
@@ -155,53 +323,144 @@
             <span class="letra-s">S</span>
         </div>
 
-        <!-- EL DIÁLOGO DE TEXTO (Se escribe solo) -->
         <p id="dialogo-rpg"></p>
-
         <button id="btn-historia" class="btn-historia">Nuestra historia juntos</button>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL: COLLAGE DE FOTOS -->
+    <!-- === CONTENIDO PRINCIPAL: LAS 27 FOTOS 3D === -->
     <div id="contenido-principal">
         <h2 class="titulo-collage">¡Hola Sofía! ❤️</h2>
 
         <div id="collage-container">
-            <div class="polaroid"><img src="img/foto1.jpg" alt="Recuerdo"><div class="caption">El inicio de todo</div></div>
-            <div class="polaroid"><img src="img/foto2.jpg" alt="Recuerdo"><div class="caption">Mi favorita</div></div>
-            <div class="polaroid"><img src="img/foto3.jpg" alt="Recuerdo"><div class="caption">Ese día especial</div></div>
-            <div class="polaroid"><img src="img/foto4.jpg" alt="Recuerdo"><div class="caption">Siempre juntos</div></div>
-            <div class="polaroid"><img src="img/foto5.jpg" alt="Recuerdo"><div class="caption">Tu sonrisa 🥰</div></div>
-            <div class="polaroid"><img src="img/foto6.jpg" alt="Recuerdo"><div class="caption">Aventuras contigo</div></div>
-            <div class="polaroid"><img src="img/foto7.jpg" alt="Recuerdo"><div class="caption">Inolvidable</div></div>
-            <div class="polaroid"><img src="img/foto8.jpg" alt="Recuerdo"><div class="caption">Me haces feliz</div></div>
-            <div class="polaroid"><img src="img/foto9.jpg" alt="Recuerdo"><div class="caption">Tú y yo</div></div>
-            <div class="polaroid"><img src="img/foto10.jpg" alt="Recuerdo"><div class="caption">Momentos únicos</div></div>
-            <div class="polaroid"><img src="img/foto11.jpg" alt="Recuerdo"><div class="caption">Magia pura</div></div>
-            <div class="polaroid"><img src="img/foto12.jpg" alt="Recuerdo"><div class="caption">Me encantas</div></div>
-            <div class="polaroid"><img src="img/foto13.jpg" alt="Recuerdo"><div class="caption">Nuestra historia</div></div>
-            <div class="polaroid"><img src="img/foto14.jpg" alt="Recuerdo"><div class="caption">Días felices</div></div>
-            <div class="polaroid"><img src="img/foto15.jpg" alt="Recuerdo"><div class="caption">Contigo todo es mejor</div></div>
-            <div class="polaroid"><img src="img/foto16.jpg" alt="Recuerdo"><div class="caption">Mi lugar seguro</div></div>
-            <div class="polaroid"><img src="img/foto17.jpg" alt="Recuerdo"><div class="caption">Recuerdos hermosos</div></div>
-            <div class="polaroid"><img src="img/foto18.jpg" alt="Recuerdo"><div class="caption">Te quiero muchísimo</div></div>
-            <div class="polaroid"><img src="img/foto19.jpg" alt="Recuerdo"><div class="caption">Por más días así</div></div>
-            <div class="polaroid"><img src="img/foto20.jpg" alt="Recuerdo"><div class="caption">Eres increíble</div></div>
-            <div class="polaroid"><img src="img/foto21.jpg" alt="Recuerdo"><div class="caption">Risas y más risas</div></div>
-            <div class="polaroid"><img src="img/foto22.jpg" alt="Recuerdo"><div class="caption">Mi persona favorita</div></div>
-            <div class="polaroid"><img src="img/foto23.webp" alt="Recuerdo"><div class="caption">Simplemente tú</div></div>
-            <div class="polaroid"><img src="img/foto24.webp" alt="Recuerdo"><div class="caption">Qué bonita eres</div></div>
-            <div class="polaroid"><img src="img/foto25.jpg" alt="Recuerdo"><div class="caption">Juntos es mejor</div></div>
-            <div class="polaroid"><img src="img/foto26.png" alt="Recuerdo"><div class="caption">Coleccionando momentos</div></div>
-            <div class="polaroid"><img src="img/foto27.png" alt="Recuerdo"><div class="caption">Y los que faltan...</div></div>
+            
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto1.jpg" alt="Recuerdo"><div class="caption">El inicio de todo</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto2.jpg" alt="Recuerdo"><div class="caption">Mi favorita</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto3.jpg" alt="Recuerdo"><div class="caption">Ese día especial</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto4.jpg" alt="Recuerdo"><div class="caption">Siempre juntos</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto5.jpg" alt="Recuerdo"><div class="caption">Tu sonrisa 🥰</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto6.jpg" alt="Recuerdo"><div class="caption">Aventuras contigo</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto7.jpg" alt="Recuerdo"><div class="caption">Inolvidable</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto8.jpg" alt="Recuerdo"><div class="caption">Me haces feliz</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto9.jpg" alt="Recuerdo"><div class="caption">Tú y yo</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto10.jpg" alt="Recuerdo"><div class="caption">Momentos únicos</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto11.jpg" alt="Recuerdo"><div class="caption">Magia pura</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto12.jpg" alt="Recuerdo"><div class="caption">Me encantas</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto13.jpg" alt="Recuerdo"><div class="caption">Nuestra historia</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto14.jpg" alt="Recuerdo"><div class="caption">Días felices</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto15.jpg" alt="Recuerdo"><div class="caption">Contigo todo es mejor</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto16.jpg" alt="Recuerdo"><div class="caption">Mi lugar seguro</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto17.jpg" alt="Recuerdo"><div class="caption">Recuerdos hermosos</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto18.jpg" alt="Recuerdo"><div class="caption">Te quiero muchísimo</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto19.jpg" alt="Recuerdo"><div class="caption">Por más días así</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto20.jpg" alt="Recuerdo"><div class="caption">Eres increíble</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto21.jpg" alt="Recuerdo"><div class="caption">Risas y más risas</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto22.jpg" alt="Recuerdo"><div class="caption">Mi persona favorita</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto23.webp" alt="Recuerdo"><div class="caption">Simplemente tú</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto24.webp" alt="Recuerdo"><div class="caption">Qué bonita eres</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto25.jpg" alt="Recuerdo"><div class="caption">Juntos es mejor</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto26.png" alt="Recuerdo"><div class="caption">Coleccionando momentos</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-inner"><div class="polaroid-front"><img src="img/foto27.png" alt="Recuerdo"><div class="caption">Y los que faltan...</div></div><div class="polaroid-back"><p>DD/MM/AAAA<br><br>Escribe aquí tu recuerdo...</p></div></div><div class="corazon-like">❤️</div>
+            </div>
+            
+        </div> <!-- FIN COLLAGE -->
+
+        <!-- === COFRE FINAL === -->
+        <div id="seccion-cofre">
+            <h3 class="instruccion-cofre">Has encontrado un tesoro...</h3>
+            <div id="cofre-btn">
+                <svg id="cofre-cerrado" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="4" width="12" height="10" fill="#c47a27"/>
+                    <rect x="3" y="5" width="10" height="1" fill="#a0601a"/>
+                    <rect x="3" y="10" width="10" height="1" fill="#a0601a"/>
+                    <line x1="2" y1="9" x2="14" y2="9" stroke="#000" stroke-width="1"/>
+                    <rect x="7" y="7" width="2" height="3" fill="#eeeeee"/>
+                    <path fill="#000" d="M2,4 h12 v1 h-12 z M2,13 h12 v1 h-12 z M2,5 h1 v8 h-1 z M13,5 h1 v8 h-1 z M7,7 h2 v1 h-2 z M7,9 h2 v1 h-2 z M6,7 h1 v3 h-1 z M9,7 h1 v3 h-1 z"/>
+                </svg>
+                <svg id="cofre-abierto" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                    <rect x="2" y="10" width="12" height="4" fill="#c47a27"/>
+                    <rect x="2" y="6" width="12" height="4" fill="#3b1f05"/>
+                    <rect x="2" y="1" width="12" height="5" fill="#a0601a"/>
+                    <rect x="7" y="4" width="2" height="2" fill="#eeeeee"/>
+                    <path fill="#000" d="M2,10 h12 v1 h-12 z M2,13 h12 v1 h-12 z M2,11 h1 v2 h-1 z M13,11 h1 v2 h-1 z M2,6 h12 v1 h-12 z M2,9 h12 v1 h-12 z M2,7 h1 v2 h-1 z M13,7 h1 v2 h-1 z M2,1 h12 v1 h-12 z M2,5 h12 v1 h-12 z M2,2 h1 v3 h-1 z M13,2 h1 v3 h-1 z M7,4 h2 v1 h-2 z M7,5 h2 v1 h-2 z M6,4 h1 v2 h-1 z M9,4 h1 v2 h-1 z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- EL SUELO SEPARA AL COFRE DEL FONDO -->
+        <div id="suelo-minecraft"></div>
+
+    </div> <!-- FIN CONTENIDO PRINCIPAL -->
+
+    <!-- === MODAL DEL PERGAMINO FINAL === -->
+    <div id="pergamino-final">
+        <div class="pergamino-inner">
+            <h3>Para mi persona favorita</h3>
+            <p>Escribe aquí tu carta final para ella. Puedes hacerla tan larga como quieras, el pergamino se adaptará automáticamente.
+            
+Te quiero muchísimo,
+Kevin.</p>
+            <button id="btn-cerrar-carta">Guardar recuerdo</button>
         </div>
     </div>
 
-    <!-- SCRIPT FINAL -->
+    <!-- SCRIPT COMPLETO -->
     <script>
-        // === 1. LÓGICA DE PARTÍCULAS EN EL CURSOR ===
+        // 1. Partículas del cursor
         const pantallaBienvenida = document.getElementById('pantalla-bienvenida');
         let ultimoTiempoParticula = 0;
-
         function crearParticula(x, y) {
             const particula = document.createElement('div');
             particula.classList.add('particula');
@@ -209,9 +468,8 @@
             particula.style.top = y + 'px';
             particula.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
             document.body.appendChild(particula);
-            setTimeout(() => { particula.remove(); }, 1000); // Borrar para no saturar memoria
+            setTimeout(() => { particula.remove(); }, 1000); 
         }
-
         pantallaBienvenida.addEventListener('mousemove', (e) => {
             if (Date.now() - ultimoTiempoParticula > 60) {
                 crearParticula(e.clientX, e.clientY);
@@ -219,21 +477,20 @@
             }
         });
 
-        // === 2. LÓGICA DEL TEXTO TIPO RPG ===
+        // 2. Texto RPG
         const textoDialogo = "Se ha encontrado a la jugadora perfecta... ¿Deseas iniciar la aventura?";
         const elementoDialogo = document.getElementById('dialogo-rpg');
         let indexTexto = 0;
-
         function escribirTexto() {
             if (indexTexto < textoDialogo.length) {
                 elementoDialogo.innerHTML += textoDialogo.charAt(indexTexto);
                 indexTexto++;
-                setTimeout(escribirTexto, 50); // Velocidad al tipear cada letra
+                setTimeout(escribirTexto, 50); 
             }
         }
-        setTimeout(escribirTexto, 1000); // Empieza 1 segundo después de cargar
+        setTimeout(escribirTexto, 1000); 
 
-        // === 3. MOTOR DE FÍSICA PARA FIGURAS REBOTANDO ===
+        // 3. Motor de física
         const itemsFlotantes = document.querySelectorAll('.item-container');
         const objetosRebotando = [];
         let animando = true;
@@ -247,63 +504,69 @@
             let angulo = Math.random() * 360;
             let dAngulo = (Math.random() > 0.5 ? 1 : -1) * 0.5;
 
-            // ¡Agregamos el estado "pausado"!
             objetosRebotando.push({ el: item, x, y, dx, dy, angulo, dAngulo, ancho: rect.width, alto: rect.height, pausado: false });
 
-            // Interacción: Atrapar objeto al pasar el mouse
             const interactuar = () => {
                 const obj = objetosRebotando[i];
                 if (!obj.pausado) {
-                    obj.pausado = true; // Detener físicas
-                    item.classList.add('item-atrapado'); // Aplicar brillo y rotación CSS
+                    obj.pausado = true; 
+                    item.classList.add('item-atrapado'); 
                     item.style.transform = `translate(${obj.x}px, ${obj.y}px) scale(1.3) rotate(${obj.angulo + 360}deg)`;
-                    
-                    // Soltar el objeto después de un momento
-                    setTimeout(() => {
-                        item.classList.remove('item-atrapado');
-                        obj.pausado = false;
-                    }, 800);
+                    setTimeout(() => { item.classList.remove('item-atrapado'); obj.pausado = false; }, 800);
                 }
             };
-
             item.addEventListener('mouseenter', interactuar);
             item.addEventListener('touchstart', interactuar);
         });
 
         function animarRebotes() {
             if (!animando) return;
-
             objetosRebotando.forEach((obj) => {
-                if (!obj.pausado) { // Solo mover si no está "atrapado"
+                if (!obj.pausado) { 
                     obj.x += obj.dx;
                     obj.y += obj.dy;
                     obj.angulo += obj.dAngulo;
-
                     if (obj.x <= 0 || obj.x + obj.ancho >= window.innerWidth) {
-                        obj.dx *= -1;
-                        obj.x = Math.max(0, Math.min(obj.x, window.innerWidth - obj.ancho));
+                        obj.dx *= -1; obj.x = Math.max(0, Math.min(obj.x, window.innerWidth - obj.ancho));
                     }
                     if (obj.y <= 0 || obj.y + obj.alto >= window.innerHeight) {
-                        obj.dy *= -1;
-                        obj.y = Math.max(0, Math.min(obj.y, window.innerHeight - obj.alto));
+                        obj.dy *= -1; obj.y = Math.max(0, Math.min(obj.y, window.innerHeight - obj.alto));
                     }
-
                     obj.el.style.transform = `translate(${obj.x}px, ${obj.y}px) rotate(${obj.angulo}deg)`;
                 }
             });
-
             requestAnimationFrame(animarRebotes);
         }
-
         animarRebotes();
 
-        // === 4. LÓGICA DEL BOTÓN Y TRANSICIÓN ===
+        // 4. Lógica de Interfaz y Fotos
         const btnHistoria = document.getElementById('btn-historia');
         const contenido = document.getElementById('contenido-principal');
         const polaroids = document.querySelectorAll('.polaroid');
         
         const musicaFondo = document.getElementById('musica-fondo');
         const sonidoClic = document.getElementById('sonido-clic');
+
+        polaroids.forEach((pol) => {
+            const inner = pol.querySelector('.polaroid-inner');
+            const corazon = pol.querySelector('.corazon-like');
+            let clickTimer; 
+
+            pol.addEventListener('click', (e) => {
+                if (e.detail === 1) {
+                    clickTimer = setTimeout(() => {
+                        inner.classList.toggle('girada');
+                    }, 250); 
+                }
+            });
+
+            pol.addEventListener('dblclick', (e) => {
+                clearTimeout(clickTimer);
+                corazon.classList.remove('animar');
+                void corazon.offsetWidth; 
+                corazon.classList.add('animar');
+            });
+        });
 
         btnHistoria.addEventListener('click', function() {
             sonidoClic.play();
@@ -313,7 +576,7 @@
             pantallaBienvenida.style.opacity = '0';
             pantallaBienvenida.style.transform = 'scale(1.2)';
 
-            setTimeout(() => { animando = false; }, 1000); // Apagar motor físico
+            setTimeout(() => { animando = false; }, 1000); 
 
             setTimeout(() => {
                 pantallaBienvenida.style.display = 'none';
@@ -331,6 +594,88 @@
                 }, 50);
                 
             }, 1000);
+        });
+
+        // 5. MOTOR DE CONFETI (NUEVO)
+        function lanzarConfeti() {
+            const cofre = document.getElementById('cofre-btn');
+            const rect = cofre.getBoundingClientRect();
+            // Calcula el centro exacto de la pantalla/cofre para la explosión
+            const centroX = rect.left + rect.width / 2;
+            const centroY = rect.top + rect.height / 2;
+            
+            // Colores: Oro, Rosa Oscuro, Diamante, Esmeralda, Blanco
+            const colores = ['#FFD700', '#FF3366', '#4AEDED', '#4CAF50', '#ffffff']; 
+            
+            for (let i = 0; i < 60; i++) {
+                const particula = document.createElement('div');
+                particula.style.position = 'fixed';
+                particula.style.left = centroX + 'px';
+                particula.style.top = centroY + 'px';
+                particula.style.width = '8px';
+                particula.style.height = '8px';
+                particula.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+                particula.style.zIndex = '150'; // Por encima de todo, pero detrás de la carta
+                document.body.appendChild(particula);
+                
+                // Matemáticas para simular una explosión tipo "fuego artificial"
+                const angulo = Math.random() * Math.PI * 2;
+                const velocidad = Math.random() * 300 + 100;
+                const tx = Math.cos(angulo) * velocidad;
+                const ty = Math.sin(angulo) * velocidad - 250; // Gravedad simulada hacia arriba
+                const rotacion = Math.random() * 720 - 360;
+                
+                // Usando Web Animations API nativa
+                particula.animate([
+                    { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px) rotate(${rotacion}deg)`, opacity: 1, offset: 0.8 },
+                    { transform: `translate(${tx}px, ${ty + 150}px) rotate(${rotacion + 90}deg)`, opacity: 0 }
+                ], {
+                    duration: 1200 + Math.random() * 1000,
+                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+                }).onfinish = () => particula.remove();
+            }
+        }
+
+        // 6. Lógica del Cofre Final Actualizada
+        const cofreBtn = document.getElementById('cofre-btn');
+        const cofreCerrado = document.getElementById('cofre-cerrado');
+        const cofreAbierto = document.getElementById('cofre-abierto');
+        const pergamino = document.getElementById('pergamino-final');
+        const pergaminoInner = document.querySelector('.pergamino-inner');
+        const btnCerrarCarta = document.getElementById('btn-cerrar-carta');
+        const sonidoCofre = document.getElementById('sonido-cofre');
+
+        cofreBtn.addEventListener('click', () => {
+            if (cofreCerrado.style.display !== 'none') {
+                sonidoCofre.play();
+                
+                cofreBtn.style.animation = 'latido 0.3s 2';
+                
+                setTimeout(() => {
+                    cofreCerrado.style.display = 'none';
+                    cofreAbierto.style.display = 'block';
+                    
+                    // ¡EXPLOSIÓN DE CONFETI AQUÍ!
+                    lanzarConfeti();
+                    
+                    setTimeout(() => {
+                        pergamino.style.display = 'flex';
+                        setTimeout(() => {
+                            pergamino.style.opacity = '1';
+                            pergaminoInner.style.transform = 'scale(1)';
+                        }, 50);
+                    }, 800);
+                }, 400);
+            }
+        });
+
+        btnCerrarCarta.addEventListener('click', () => {
+            pergamino.style.opacity = '0';
+            pergaminoInner.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                pergamino.style.display = 'none';
+            }, 500);
         });
     </script>
 </body>
