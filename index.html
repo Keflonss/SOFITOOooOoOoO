@@ -133,8 +133,39 @@
         #seccion-cofre {
             width: 100%; margin-top: 60px;
             display: flex; flex-direction: column; align-items: center;
+            position: relative;
             /* Eliminamos el fondo de tierra de aquí para que herede el cielo con nubes */
         }
+        /* --- NUEVO: ICONO DE PERGAMINO FLOTANTE --- */
+        #icono-pergamino {
+            position: absolute;
+            right: 15%; /* Lo pega a la derecha de la pantalla */
+            bottom: 40px; /* A la altura del cofre */
+            font-size: 3.5rem; /* Tamaño del icono */
+            cursor: pointer;
+            z-index: 20;
+            animation: latido-icono 2s infinite alternate;
+        }
+
+        /* Aura dorada detrás del pergamino */
+        #icono-pergamino::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 120%; height: 120%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #icono-pergamino:hover { transform: scale(1.15) !important; filter: brightness(1.2); }
+
+        @keyframes latido-icono {
+            0% { transform: translateY(0); filter: drop-shadow(0px 0px 5px rgba(255,215,0,0.4)); }
+            100% { transform: translateY(-10px); filter: drop-shadow(0px 0px 25px rgba(255,215,0,1)); }
+        }
+        
         
         /* --- EL COFRE: ENTRADA ÉPICA Y RESPLANDOR --- */
         #cofre-btn {
@@ -325,6 +356,7 @@
     <audio id="musica-fondo" loop><source src="musica.mp3" type="audio/mpeg"></audio>
     <audio id="sonido-clic"><source src="clic.mp3" type="audio/mpeg"></audio>
     <audio id="sonido-cofre"><source src="cofre.mp3" type="audio/mpeg"></audio>
+    
 
     <div id="pantalla-bienvenida">
         
@@ -464,6 +496,9 @@
                     <rect x="7" y="4" width="2" height="2" fill="#eeeeee"/>
                     <path fill="#000" d="M2,10 h12 v1 h-12 z M2,13 h12 v1 h-12 z M2,11 h1 v2 h-1 z M13,11 h1 v2 h-1 z M2,6 h12 v1 h-12 z M2,9 h12 v1 h-12 z M2,7 h1 v2 h-1 z M13,7 h1 v2 h-1 z M2,1 h12 v1 h-12 z M2,5 h12 v1 h-12 z M2,2 h1 v3 h-1 z M13,2 h1 v3 h-1 z M7,4 h2 v1 h-2 z M7,5 h2 v1 h-2 z M6,4 h1 v2 h-1 z M9,4 h1 v2 h-1 z"/>
                 </svg>
+            </div>
+            <div id="icono-pergamino" style="display: none;">
+                <span>📜</span>
             </div>
         </div>
 
@@ -673,6 +708,7 @@ flunflin.</p>
         const pergaminoInner = document.querySelector('.pergamino-inner');
         const btnCerrarCarta = document.getElementById('btn-cerrar-carta');
         const sonidoCofre = document.getElementById('sonido-cofre');
+        const iconoPergamino = document.getElementById('icono-pergamino');
 
         cofreBtn.addEventListener('click', () => {
             if (cofreCerrado.style.display !== 'none') {
@@ -698,12 +734,27 @@ flunflin.</p>
             }
         });
 
+        // Al cerrar la carta, aparece el pergamino brillante
         btnCerrarCarta.addEventListener('click', () => {
             pergamino.style.opacity = '0';
             pergaminoInner.style.transform = 'scale(0.8)';
             setTimeout(() => {
                 pergamino.style.display = 'none';
+                
+                // Mostrar el icono brillante para reabrir
+                iconoPergamino.style.display = 'block';
             }, 500);
+        });
+
+        // NUEVO: Al hacer clic en el pergamino flotante, reabrir la carta
+        iconoPergamino.addEventListener('click', () => {
+            sonidoClic.play(); // Usamos el sonido de clic que ya tienes
+            pergamino.style.display = 'flex';
+            
+            setTimeout(() => {
+                pergamino.style.opacity = '1';
+                pergaminoInner.style.transform = 'scale(1)';
+            }, 50);
         });
     </script>
 </body>
