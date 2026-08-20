@@ -228,21 +228,49 @@
 
         .polaroid-inner.girada { transform: rotateY(180deg); }
 
+        /* --- OPCIÓN 2 MEJORADA: PERGAMINO HIPERREALISTA --- */
         .polaroid-front, .polaroid-back {
             position: absolute; width: 100%; height: 100%;
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
-            background: #fff; padding: 15px; border-radius: 3px;
+            
+            /* LA MAGIA DE LA TEXTURA: Color base + Bordes oscurecidos + Ruido SVG para el grano del papel */
+            background-color: #e8d5a5;
+            background-image: 
+                radial-gradient(circle at center, transparent 30%, rgba(101, 56, 17, 0.4) 100%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+            
+            border: 1px solid #b89b68;
+            padding: 15px; 
+            border-radius: 2px 7px 3px 6px; /* Bordes levemente irregulares para simular desgaste */
             display: flex; flex-direction: column;
+            
+            /* Sombras internas para efecto de papel quemado en las orillas */
+            box-shadow: 
+                inset 0 0 35px rgba(139, 69, 19, 0.4), 
+                2px 4px 12px rgba(0,0,0,0.3);
         }
 
-        .polaroid-front img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #eee; }
-        .polaroid-front .caption { text-align: center; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #333; line-height: 1.2; }
-
+        .polaroid-front img { 
+            width: 100%; height: 220px; object-fit: cover; 
+            border: 1px solid #6b4423; 
+            border-radius: 2px;
+            /* Filtro sepia sutil para que la foto también se vea vintage */
+            filter: sepia(0.25) contrast(0.95); 
+        }
+        
+        .polaroid-front .caption { 
+            text-align: center; margin-top: 15px; 
+            font-family: 'Caveat', cursive; font-size: 1.6rem; 
+            color: #4a2c11; line-height: 1.2; font-weight: bold; 
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5); /* Resalte tipo tinta */
+        }
+        
         .polaroid-back {
-            transform: rotateY(180deg);
+            transform: rotateY(180deg); 
             justify-content: center; align-items: center; text-align: center;
-            background-color: #fffafb; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: #c9184a;
-            padding: 20px; border: 2px dashed #ffb3c6;
+            font-family: 'Caveat', cursive; font-size: 1.5rem; color: #4a2c11;
+            padding: 25px; 
+            border: 2px dashed rgba(139, 69, 19, 0.5); /* Costura trasera */
         }
 
         /* --- ANIMACIÓN DEL CORAZÓN (DOBLE CLIC) --- */
@@ -448,10 +476,10 @@
     <div id="pergamino-final">
         <div class="pergamino-inner">
             <h3>Para mi persona favorita</h3>
-            <p>Escribe aquí tu carta final para ella. Puedes hacerla tan larga como quieras, el pergamino se adaptará automáticamente.
+            <p>Todas estas fotos no son suficientes para mostrar todos nuesrtros momentos juntos, creeme que si pudiera hacer una pelicula de nuestra vida juntos y ponerla aquí lo haria sin dudas. A cambio te regalo esta pagina web para que siempre tengas un lugar a donde ir cuando no este a tu lado. Espero poder seguir llenando esta pagina de momentos contigo, porque te quiero para mi vida entera.
             
-Te quiero muchísimo,
-Kevin.</p>
+Te amo mi sol, para siempre y por siempre,
+flunflin.</p>
             <button id="btn-cerrar-carta">Guardar recuerdo</button>
         </div>
     </div>
