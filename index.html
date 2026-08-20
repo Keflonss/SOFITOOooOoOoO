@@ -335,13 +335,44 @@
         #cofre-btn:hover { transform: scale(1.1); }
         #cofre-btn svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
         
+       /* --- MODAL DEL PERGAMINO (Ahora responsivo para móviles) --- */
         #pergamino-final {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.85); z-index: 200; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.5s ease;
+            background: rgba(0,0,0,0.85); z-index: 200; display: none; 
+            align-items: center; justify-content: center; 
+            opacity: 0; transition: opacity 0.5s ease;
+            padding: 20px; /* Margen de seguridad para que no choque con los bordes del cel */
         }
+        
         .pergamino-inner {
-            background-color: #f4e7c3; width: 90%; max-width: 600px; padding: 40px; border-radius: 5px; border: 4px solid #8B4513; box-shadow: inset 0 0 20px rgba(139,69,19,0.3), 0 10px 30px rgba(0,0,0,0.8); text-align: center; transform: scale(0.8); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: #f4e7c3; 
+            width: 100%; max-width: 600px; 
+            max-height: 85vh; /* CLAVE: Nunca será más alta que el 85% de la pantalla */
+            overflow-y: auto; /* CLAVE: Si el texto es muy largo, se podrá hacer scroll */
+            padding: 30px 20px; /* Ajustamos el padding para celulares */
+            border-radius: 5px; border: 4px solid #8B4513; 
+            box-shadow: inset 0 0 20px rgba(139,69,19,0.3), 0 10px 30px rgba(0,0,0,0.8); 
+            text-align: center; transform: scale(0.8); 
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
+        /* --- ESTILIZANDO EL SCROLLBAR (Para que parezca de madera/pergamino) --- */
+        .pergamino-inner::-webkit-scrollbar {
+            width: 10px;
+        }
+        .pergamino-inner::-webkit-scrollbar-track {
+            background: rgba(139, 69, 19, 0.1); 
+            border-left: 1px solid rgba(139, 69, 19, 0.2);
+        }
+        .pergamino-inner::-webkit-scrollbar-thumb {
+            background: #8B4513; 
+            border-radius: 5px;
+            border: 2px solid #f4e7c3; /* Borde del mismo color que el pergamino */
+        }
+        .pergamino-inner::-webkit-scrollbar-thumb:hover {
+            background: #5c2e0b; /* Más oscuro al pasar el mouse */
+        }
+
         .pergamino-inner h3 { font-family: 'Press Start 2P', cursive; font-size: 1.2rem; color: #8B4513; margin-bottom: 20px; }
         .pergamino-inner p { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #3e2723; line-height: 1.4; white-space: pre-wrap; }
         #btn-cerrar-carta {
