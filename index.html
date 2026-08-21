@@ -416,6 +416,40 @@
         }
         #btn-cerrar-carta:active { transform: translateY(4px); box-shadow: 0 0 0 #5c2e0b; }
 
+        /* =========================================
+           EFECTOS MÁGICOS (EASTER EGG Y CURSOR)
+           ========================================= */
+        
+        /* 1. Lluvia de corazones (Easter Egg) */
+        .corazon-lluvia {
+            position: fixed;
+            top: -10vh; /* Empiezan un poco más arriba de la pantalla */
+            font-size: 2rem;
+            z-index: 9999;
+            pointer-events: none; /* Crucial para que no bloqueen los clics */
+            animation: caer-corazon linear forwards;
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5));
+        }
+
+        @keyframes caer-corazon {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* 2. Rastro del cursor */
+        .rastro-magico {
+            position: absolute;
+            pointer-events: none;
+            z-index: 9998;
+            font-size: 1.2rem;
+            animation: desvanecer-rastro 0.8s ease-out forwards;
+        }
+
+        @keyframes desvanecer-rastro {
+            0% { opacity: 1; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(0.3) translateY(-20px); }
+        }
+
     </style>
 </head>
 <body>
@@ -845,6 +879,75 @@ flunflin.</p>
                 pergaminoInner.style.transform = 'scale(1)';
             }, 50);
         });
+        // =========================================
+        // 1. EASTER EGG: CÓDIGO SECRETO "SOFIA"
+        // =========================================
+        const codigoSecreto = "sofia";
+        let historialTeclas = "";
+
+        document.addEventListener('keydown', (e) => {
+            // Guardamos la tecla presionada en minúscula
+            historialTeclas += e.key.toLowerCase();
+            
+            // Mantenemos el historial del mismo tamaño que la palabra secreta (5 letras)
+            if (historialTeclas.length > codigoSecreto.length) {
+                historialTeclas = historialTeclas.substring(1);
+            }
+            
+            // Si coincide, ¡Desatamos la magia!
+            if (historialTeclas === codigoSecreto) {
+                activarLluviaCorazones();
+                historialTeclas = ""; // Reiniciamos el historial
+            }
+        });
+
+        function activarLluviaCorazones() {
+            // Creamos 50 corazones
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const corazon = document.createElement('div');
+                    corazon.innerHTML = '❤️'; // Puedes cambiarlo por un PNG de un corazón pixelado si quieres
+                    corazon.className = 'corazon-lluvia';
+                    
+                    // Posición horizontal aleatoria
+                    corazon.style.left = Math.random() * 100 + 'vw';
+                    
+                    // Tamaño y velocidad aleatoria para darle realismo
+                    corazon.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                    corazon.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    
+                    document.body.appendChild(corazon);
+                    
+                    // Limpieza: Borramos el corazón del HTML cuando termina de caer para no consumir memoria
+                    setTimeout(() => corazon.remove(), 5000);
+                }, i * 100); // Aparecen en cascada, no todos de golpe
+            }
+        }
+
+       // =========================================
+        // 2. RASTRO MÁGICO SOLO EN SEGUNDA PANTALLA
+        // =========================================
+        
+        // REEMPLAZA 'id-de-tu-segunda-pantalla' por el ID real del <div> que envuelve tu collage y el cofre.
+        // (Por ejemplo: 'contenido-principal' o 'seccion-fotos')
+        const segundaPantalla = document.getElementById('contenido-principal');
+
+        if (segundaPantalla) {
+            segundaPantalla.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.3) return; 
+
+                const rastro = document.createElement('div');
+                rastro.className = 'rastro-magico';
+                rastro.innerHTML = '✨'; 
+                
+                rastro.style.left = e.pageX + 'px';
+                rastro.style.top = e.pageY + 'px';
+                
+                document.body.appendChild(rastro);
+                
+                setTimeout(() => rastro.remove(), 800);
+            });
+        }
     </script>
 </body>
 </html>
